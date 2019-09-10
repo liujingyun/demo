@@ -26,9 +26,9 @@ public class DemoApplicationTests {
         treeMap.put(14,"1");
         treeMap.put(15,"1");
         Set<Map.Entry<Integer, String>> entries = treeMap.entrySet();
-        for (Map.Entry<Integer,String> set : entries){
-
-        }
+//        for (Map.Entry<Integer,String> set : entries){
+//
+//        }
         // System.out.println();
         treeMap.put(5,"1");
     }
