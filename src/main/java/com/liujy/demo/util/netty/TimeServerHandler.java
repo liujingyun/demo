@@ -10,17 +10,19 @@ import java.nio.ByteBuffer;
 import java.util.Date;
 
 public class TimeServerHandler extends ChannelInboundHandlerAdapter {
+    private int count;
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf buf = (ByteBuf) msg;
         byte[] req = new byte[buf.readableBytes()];
          buf.readBytes(req);
         String s = new String(req, "UTF-8");
-        System.out.println("the time server receive "+s);
+        System.out.println("the time server receive "+s+";the counter is :"+ ++count);
 
-        ByteBuf resp = Unpooled.copiedBuffer(new Date(System.currentTimeMillis()).toString().getBytes());
-
-        ctx.write(resp);
+        String currentTime = new Date(System.currentTimeMillis()).toString();
+        currentTime += System.getProperty("line.separator");
+        ByteBuf resp = Unpooled.copiedBuffer(currentTime.getBytes());
+        ctx.writeAndFlush(resp);
     }
 
     @Override
